@@ -17,41 +17,31 @@ export const videos = [
   "/assets/video/ooty-hills.mp4",
 ];
 
-// Real, freely-licensed car photos hotlinked from Wikimedia Commons via the
-// stable Special:FilePath redirect (no API key needed, never breaks/expires).
-// These are CC-BY / CC-BY-SA licensed — technically that requires attribution
-// if you use them long-term. Fine for now; swap in your own fleet photos
-// whenever you have them and drop the credits line from README-CHANGES.md.
-const wikimedia = (filename: string, width = 640) =>
-  `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(
-    filename
-  )}?width=${width}`;
-
 // Swiper carousel — "Our Fleet"
 export const popularCars = [
   {
     title: "Toyota",
     subtitle: "Glanza",
     price: "₹10 / km",
-    img: wikimedia("Toyota Glanza 2022 Facelift.jpg"),
+    img: "/assets/img/glanza.png",
   },
   {
     title: "Toyota",
     subtitle: "Innova Crysta",
     price: "₹13 / km",
-    img: wikimedia("Toyota Innova Crysta.jpg"),
+    img: "/assets/img/innova.png",
   },
   {
     title: "Maruti Suzuki",
     subtitle: "Swift Dzire",
     price: "₹9 / km",
-    img: wikimedia("Maruti Suzuki Dzire VXi VVT (front).JPG"),
+    img: "/assets/img/swift.png",
   },
   {
     title: "Swaraj Mazda",
     subtitle: "Tempo Traveller (12-Seater)",
     price: "₹18 / km",
-    img: wikimedia("Tourist vehicles at Rohtang Pass.jpg"),
+    img: "/assets/img/swaraj-mazda.png",
   },
 ];
 
@@ -61,28 +51,28 @@ export const featuredCars = [
     title: "Toyota",
     subtitle: "Glanza",
     price: "₹10 / km",
-    img: wikimedia("Toyota Glanza 2022 Facelift.jpg"),
+    img: "/assets/img/glanza-side.png",
     brand: "glanza",
   },
   {
     title: "Toyota",
     subtitle: "Innova Crysta",
     price: "₹13 / km",
-    img: wikimedia("Toyota Innova Crysta.jpg"),
+    img: "/assets/img/innova-side.png",
     brand: "innova",
   },
   {
     title: "Maruti Suzuki",
     subtitle: "Swift Dzire",
     price: "₹9 / km",
-    img: wikimedia("Maruti Suzuki Dzire VXi VVT (front).JPG"),
+    img: "/assets/img/swift-side.png",
     brand: "swift",
   },
   {
     title: "Swaraj Mazda",
     subtitle: "Tempo Traveller",
     price: "₹18 / km",
-    img: wikimedia("Tourist vehicles at Rohtang Pass.jpg"),
+    img: "/assets/img/swaraj-side.png",
     brand: "swaraj",
   },
 ];
@@ -97,7 +87,7 @@ export const filters = [
 
 // Brand logo strip
 export const logos = [
-  wikimedia("Toyota logo (Red).svg", 200),
-  wikimedia("Suzuki logo 2.svg", 200),
-  wikimedia("Swaraj Mazda logo.svg", 200),
+  "/assets/img/logo-toyota.png",
+  "/assets/img/logo-maruti-suzuki.png",
+  "/assets/img/logo-swaraj-mazda.png",
 ];

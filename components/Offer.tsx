@@ -1,25 +1,34 @@
 export default function Offer() {
   return (
-    <section className="offer section">
+    <section className="offer section" id="offer">
       <div className="offer__container container grid">
-        <img src="/assets/img/offer-bg.png" alt="" className="offer__bg" />
+        <img
+          src="https://placehold.co/1200x600/0f0f1a/1a1a2e?text=+"
+          alt=""
+          className="offer__bg"
+        />
 
         <div className="offer__data">
           <h2 className="section__title offer__title">
-            Do You Want To Receive <br /> Special Offers?
+            Get Special Offers On <br /> Your Ooty Cab Booking
           </h2>
 
           <p className="offer__description">
-            Be the first to receive all the information about our products and
-            new cars by email by subscribing to our mailing list.
+            Be the first to know about discounted Ooty sightseeing packages,
+            Coonoor &amp; Kotagiri tour combos, and off-season fares.
+            Subscribe to our updates.
           </p>
 
-          <a href="#" className="button">
-            Subscribe Now
+          <a href="#featured" className="button">
+            Book Now
           </a>
         </div>
 
-        <img src="/assets/img/offer.png" alt="Special offer" className="offer__img" />
+        <img
+          src="https://commons.wikimedia.org/wiki/Special:FilePath/Toyota%20Glanza%202022%20Facelift.jpg?width=500"
+          alt="Toyota Glanza taxi offer for Ooty tour packages"
+          className="offer__img"
+        />
       </div>
     </section>
   );

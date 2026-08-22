@@ -1,29 +1,33 @@
 export default function Features() {
   return (
     <section className="features section">
-      <h2 className="section__title">More Features</h2>
+      <h2 className="section__title">Why Ride With Us</h2>
 
       <div className="features__container container grid">
         <div className="features__group">
-          <img src="/assets/img/features.png" alt="Features" className="features__img" />
+          <img
+            src="https://commons.wikimedia.org/wiki/Special:FilePath/Maruti%20Suzuki%20Dzire%20VXi%20VVT.JPG?width=700"
+            alt="Maruti Suzuki Swift Dzire taxi covering Nilgiri hills routes"
+            className="features__img"
+          />
 
           <div className="features__card features__card-1">
-            <h3 className="features__card-title">800v</h3>
+            <h3 className="features__card-title">24/7</h3>
             <p className="features__card-description">
-              Turbo <br /> Chargin
+              Cab <br /> Availability
             </p>
           </div>
 
           <div className="features__card features__card-2">
-            <h3 className="features__card-title">350</h3>
+            <h3 className="features__card-title">10+</h3>
             <p className="features__card-description">
-              Km <br /> Range
+              Years <br /> Experience
             </p>
           </div>
           <div className="features__card features__card-3">
-            <h3 className="features__card-title">480</h3>
+            <h3 className="features__card-title">50+</h3>
             <p className="features__card-description">
-              Km <br /> Travel
+              Nilgiris <br /> Destinations
             </p>
           </div>
         </div>

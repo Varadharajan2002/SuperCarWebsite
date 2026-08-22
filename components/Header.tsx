@@ -35,8 +35,8 @@ export default function Header() {
     <header className={`header${scrolled ? " scroll-header" : ""}`} id="header">
       <nav className="nav container">
         <a href="#home" className="nav__logo">
-          <i className="ri-steering-fill"></i>
-          NextCar
+          <i className="ri-taxi-line"></i>
+          Ooty Cabs
         </a>
         <div className={`nav__menu${menuOpen ? " show-menu" : ""}`} id="nav-menu">
           <ul className="nav__list">
@@ -61,6 +61,10 @@ export default function Header() {
             <i className="ri-close-line"></i>
           </div>
         </div>
+
+        <a href="tel:+918489322556" className="nav__call">
+          <i className="ri-phone-fill"></i> +91 84893 22556
+        </a>
 
         <div
           className="nav__toggle"
