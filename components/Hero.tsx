@@ -2,11 +2,9 @@
 
 import { useState } from "react";
 import { videos } from "@/lib/data";
-import BookingModal from "./BookingModal";
 
 export default function Hero() {
   const [activeSlide, setActiveSlide] = useState(0);
-  const [bookingOpen, setBookingOpen] = useState(false);
 
   return (
     <>
@@ -16,51 +14,47 @@ export default function Hero() {
 
         <div className="home__container container grid">
           <div className="home__data">
-            <h1 className="home__title">Ooty&apos;s Trusted Cab Service</h1>
-            <h2 className="home__subtitle">Toyota Glanza</h2>
+            <h1 className="home__title">Pick Your Best Car</h1>
+            <h2 className="home__subtitle">Ferrari 458</h2>
             <h3 className="home__elec">
-              <i className="ri-map-pin-2-fill"></i>
-              LOCAL &amp; OUTSTATION TAXI, NILGIRIS
+              <i className="ri-flashlight-fill"></i>
+              RELENTLESS FORCE
             </h3>
           </div>
 
           <img
-            src="https://commons.wikimedia.org/wiki/Special:FilePath/Toyota%20Glanza%20(front).jpg?width=800"
-            alt="Toyota Glanza cab available for booking in Ooty, Nilgiris"
+            src="/assets/img/home5.png"
+            alt="Ferrari 458"
             className="home__img"
           />
           <div className="home__car">
             <div className="home__car-data">
               <div className="home__car-icon">
-                <i className="ri-time-line"></i>
+                <i className="ri-temp-cold-line"></i>
               </div>
-              <h2 className="home__car-number">10+ Yrs</h2>
-              <h3 className="home__car-name">Experience</h3>
+              <h2 className="home__car-number">3.0s</h2>
+              <h3 className="home__car-name">0-100 km/h</h3>
             </div>
 
             <div className="home__car-data">
               <div className="home__car-icon">
-                <i className="ri-road-map-line"></i>
+                <i className="ri-dashboard-2-line"></i>
               </div>
-              <h2 className="home__car-number">5000+</h2>
-              <h3 className="home__car-name">Trips Completed</h3>
+              <h2 className="home__car-number">419</h2>
+              <h3 className="home__car-name">POWER (KW)</h3>
             </div>
             <div className="home__car-data">
               <div className="home__car-icon">
-                <i className="ri-customer-service-2-line"></i>
+                <i className="ri-flashlight-fill"></i>
               </div>
-              <h2 className="home__car-number">24/7</h2>
-              <h3 className="home__car-name">Available</h3>
+              <h2 className="home__car-number">325 km/h</h2>
+              <h3 className="home__car-name">MAX. SPEED</h3>
             </div>
           </div>
 
-          <button
-            type="button"
-            className="home__button"
-            onClick={() => setBookingOpen(true)}
-          >
-            BOOK NOW
-          </button>
+          <a href="#about" className="home__button">
+            START
+          </a>
 
           <div className="slider__bg">
             {videos.map((_, i) => (
@@ -80,7 +74,7 @@ export default function Hero() {
             <i className="ri-instagram-fill"></i>
           </a>
           <a href="#" className="home__social-icon">
-            <i className="ri-whatsapp-fill"></i>
+            <i className="ri-twitter-fill"></i>
           </a>
         </div>
       </section>
@@ -100,8 +94,6 @@ export default function Hero() {
           ))}
         </div>
       </section>
-
-      <BookingModal isOpen={bookingOpen} onClose={() => setBookingOpen(false)} />
     </>
   );
 }

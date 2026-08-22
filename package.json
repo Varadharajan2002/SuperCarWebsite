@@ -9,7 +9,6 @@
   },
   "dependencies": {
     "next": "^15.5.0",
-    "nodemailer": "^9.0.5",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "scrollreveal": "^4.0.9",
@@ -17,7 +16,6 @@
   },
   "devDependencies": {
     "@types/node": "^22.15.0",
-    "@types/nodemailer": "^8.0.1",
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.0",
     "@types/scrollreveal": "^0.0.11",

@@ -1,28 +1,26 @@
 "use client";
 
 import { useState } from "react";
-import { featuredCars, filters } from "@/lib/data";
+import { featuredCars } from "@/lib/data";
 
-import BookingModal from "./BookingModal";
+const filters = [
+  { id: "all", label: "All" },
+  { id: "tesla", img: "/assets/img/logo3.png", alt: "Tesla" },
+  { id: "audi", img: "/assets/img/logo2.png", alt: "Audi" },
+  { id: "porsche", img: "/assets/img/logo1.png", alt: "Porsche" },
+] as const;
 
 export default function Featured() {
   const [filter, setFilter] = useState<(typeof filters)[number]["id"]>("all");
-  const [bookingOpen, setBookingOpen] = useState(false);
-  const [selectedCar, setSelectedCar] = useState("");
 
   const cars =
     filter === "all"
       ? featuredCars
       : featuredCars.filter((car) => car.brand === filter);
 
-  const openBookingFor = (title: string, subtitle: string) => {
-    setSelectedCar(`${title} ${subtitle}`);
-    setBookingOpen(true);
-  };
-
   return (
     <section className="featured section" id="featured">
-      <h2 className="section__title">Book A Cab In Ooty</h2>
+      <h2 className="section__title">Featured Luxury Cars</h2>
       <div className="featured__container container">
         <ul className="featured__filters">
           {filters.map((item) => (
@@ -32,7 +30,11 @@ export default function Featured() {
                 className={`featured__item${filter === item.id ? " active-featured" : ""}`}
                 onClick={() => setFilter(item.id)}
               >
-                <span>{item.label}</span>
+                {"label" in item ? (
+                  <span>{item.label}</span>
+                ) : (
+                  <img src={item.img} alt={item.alt} />
+                )}
               </button>
             </li>
           ))}
@@ -50,28 +52,17 @@ export default function Featured() {
               <h3 className="featured__subtitle">{car.subtitle}</h3>
               <img
                 src={car.img}
-                alt={`${car.title} ${car.subtitle} taxi for hire in Ooty`}
+                alt={`${car.title} ${car.subtitle}`}
                 className="featured__img"
               />
               <h3 className="featured__price">{car.price}</h3>
-              <button
-                className="button featured__button"
-                type="button"
-                onClick={() => openBookingFor(car.title, car.subtitle)}
-                aria-label={`Book ${car.title} ${car.subtitle}`}
-              >
-                <i className="ri-taxi-line"></i>
+              <button className="button featured__button" type="button">
+                <i className="ri-shopping-bag-2-line"></i>
               </button>
             </article>
           ))}
         </div>
       </div>
-
-      <BookingModal
-        isOpen={bookingOpen}
-        onClose={() => setBookingOpen(false)}
-        defaultCar={selectedCar}
-      />
     </section>
   );
 }
