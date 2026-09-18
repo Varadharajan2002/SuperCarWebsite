@@ -1,13 +1,9 @@
-"use client";
-
-import { useEffect, useState } from "react";
+import Link from "next/link";
+import { site } from "@/lib/site";
+import BookButton from "@/components/BookButton";
 
 export default function Footer() {
-  const [date, setDate] = useState("");
-
-  useEffect(() => {
-    setDate(new Date().toString());
-  }, []);
+  const year = new Date().getFullYear();
 
   return (
     <footer className="footer section">
@@ -16,98 +12,95 @@ export default function Footer() {
 
       <div className="footer__container container grid">
         <div className="footer__content">
-          <a href="#home" className="footer__logo">
+          <Link href="/" className="footer__logo">
             <i className="ri-steering-line"></i>
-            NextCar
-          </a>
+            {site.name}
+          </Link>
           <p className="footer__description">
-            We offer the best cars of <br />
-            the most recognized brands in <br />
-            the world.
+            Private cabs for Ooty sightseeing, airport
+            <br />
+            transfers and Nilgiris tours from Ketti.
           </p>
+          <p className="footer__address">{site.addressLine}</p>
+          <a href={`tel:${site.phoneTel}`} className="footer-phone">
+            <i className="ri-phone-fill"></i>
+            {site.phoneDisplay}
+          </a>
         </div>
 
         <div className="footer__content">
-          <h3 className="footer__title">Company </h3>
-
+          <h3 className="footer__title">Tours</h3>
           <ul className="footer__links">
             <li>
-              <a href="#about" className="footer__links">
-                About
-              </a>
+              <Link href="/tours/ooty" className="footer__links">
+                Ooty Sightseeing
+              </Link>
             </li>
             <li>
-              <a href="#popular" className="footer__links">
-                Cars
-              </a>
+              <Link href="/tours/coonoor" className="footer__links">
+                Coonoor
+              </Link>
             </li>
             <li>
-              <a href="#" className="footer__links">
-                History
-              </a>
+              <Link href="/tours/pykara" className="footer__links">
+                Pykara
+              </Link>
             </li>
             <li>
-              <a href="#featured" className="footer__links">
-                Shop
-              </a>
+              <Link href="/tours/mudumalai" className="footer__links">
+                Mudumalai
+              </Link>
             </li>
           </ul>
         </div>
 
         <div className="footer__content">
-          <h3 className="footer__title">Information </h3>
+          <h3 className="footer__title">Travel</h3>
           <ul className="footer__links">
             <li>
-              <a href="#" className="footer__links">
-                Request a quote
-              </a>
+              <Link href="/transfers" className="footer__links">
+                Airport & Railway
+              </Link>
             </li>
             <li>
-              <a href="#" className="footer__links">
-                Find a dealer
-              </a>
+              <Link href="/vehicles" className="footer__links">
+                Cab rental
+              </Link>
             </li>
             <li>
-              <a href="#" className="footer__links">
-                Contact us
-              </a>
+              <Link href="/toy-train" className="footer__links">
+                Toy Train
+              </Link>
             </li>
             <li>
-              <a href="#" className="footer__links">
-                Services
-              </a>
+              <Link href="/packages" className="footer__links">
+                South India packages
+              </Link>
+            </li>
+            <li>
+              <BookButton className="footer__links footer__book">Book Now</BookButton>
             </li>
           </ul>
         </div>
 
         <div className="footer__content">
-          <h3 className="footer__title"> Follow us </h3>
-
+          <h3 className="footer__title">Contact</h3>
           <ul className="footer__social">
-            <a href="" target="_blank" className="footer__social-link">
-              <i className="ri-facebook-fill"></i>
+            <a href={site.whatsapp} target="_blank" className="footer__social-link" rel="noreferrer">
+              <i className="ri-whatsapp-line"></i>
             </a>
-            <a href="" target="_blank" className="footer__social-link">
-              <i className="ri-instagram-line"></i>
+            <a href={`tel:${site.phoneTel}`} className="footer__social-link">
+              <i className="ri-phone-line"></i>
             </a>
-            <a href="" target="_blank" className="footer__social-link">
-              <i className="ri-twitter-line"></i>
+            <a href={`mailto:${site.email}`} className="footer__social-link">
+              <i className="ri-mail-line"></i>
             </a>
           </ul>
         </div>
       </div>
+
       <span className="footer__copy">
-        &#169;{" "}
-        <a
-          target="_blank"
-          href="https://abdullahmoin.web.app"
-          className="footer__dev-link"
-          rel="noreferrer"
-        >
-          abdullah-moin.
-        </a>{" "}
-        All rigths reserved
-        <p id="date">{date}</p>
+        © {year} {site.name} • {site.addressLine}. All rights reserved.
       </span>
     </footer>
   );

@@ -2,9 +2,12 @@
 
 import { useState } from "react";
 import { videos } from "@/lib/data";
+import { site } from "@/lib/site";
+import { useBooking } from "@/components/BookingContext";
 
 export default function Hero() {
   const [activeSlide, setActiveSlide] = useState(0);
+  const { openBooking } = useBooking();
 
   return (
     <>
@@ -14,47 +17,47 @@ export default function Hero() {
 
         <div className="home__container container grid">
           <div className="home__data">
-            <h1 className="home__title">Pick Your Best Car</h1>
-            <h2 className="home__subtitle">Ferrari 458</h2>
+            <h1 className="home__title">Ooty Cab & Taxi Tours</h1>
+            <h2 className="home__subtitle">Toyota Glanza</h2>
             <h3 className="home__elec">
-              <i className="ri-flashlight-fill"></i>
-              RELENTLESS FORCE
+              <i className="ri-map-pin-2-fill"></i>
+              KETTI • OOTY • NILGIRIS
             </h3>
           </div>
 
           <img
             src="/assets/img/home5.png"
-            alt="Ferrari 458"
+            alt="Toyota Glanza taxi for Ooty sightseeing and Nilgiris cab booking"
             className="home__img"
           />
           <div className="home__car">
             <div className="home__car-data">
               <div className="home__car-icon">
-                <i className="ri-temp-cold-line"></i>
+                <i className="ri-user-line"></i>
               </div>
-              <h2 className="home__car-number">3.0s</h2>
-              <h3 className="home__car-name">0-100 km/h</h3>
+              <h2 className="home__car-number">4</h2>
+              <h3 className="home__car-name">Seater sedan</h3>
             </div>
 
             <div className="home__car-data">
               <div className="home__car-icon">
-                <i className="ri-dashboard-2-line"></i>
+                <i className="ri-time-line"></i>
               </div>
-              <h2 className="home__car-number">419</h2>
-              <h3 className="home__car-name">POWER (KW)</h3>
+              <h2 className="home__car-number">8h</h2>
+              <h3 className="home__car-name">Local tours</h3>
             </div>
             <div className="home__car-data">
               <div className="home__car-icon">
-                <i className="ri-flashlight-fill"></i>
+                <i className="ri-money-rupee-circle-line"></i>
               </div>
-              <h2 className="home__car-number">325 km/h</h2>
-              <h3 className="home__car-name">MAX. SPEED</h3>
+              <h2 className="home__car-number">₹2500</h2>
+              <h3 className="home__car-name">From onwards</h3>
             </div>
           </div>
 
-          <a href="#about" className="home__button">
-            START
-          </a>
+          <button type="button" className="home__button" onClick={openBooking}>
+            BOOK NOW
+          </button>
 
           <div className="slider__bg">
             {videos.map((_, i) => (
@@ -67,14 +70,14 @@ export default function Hero() {
           </div>
         </div>
         <div className="home__social">
-          <a href="#" className="home__social-icon">
-            <i className="ri-facebook-fill"></i>
+          <a href={site.whatsapp} className="home__social-icon" target="_blank" rel="noreferrer">
+            <i className="ri-whatsapp-fill"></i>
           </a>
-          <a href="#" className="home__social-icon">
-            <i className="ri-instagram-fill"></i>
+          <a href={`tel:${site.phoneTel}`} className="home__social-icon">
+            <i className="ri-phone-fill"></i>
           </a>
-          <a href="#" className="home__social-icon">
-            <i className="ri-twitter-fill"></i>
+          <a href={`mailto:${site.email}`} className="home__social-icon">
+            <i className="ri-mail-fill"></i>
           </a>
         </div>
       </section>

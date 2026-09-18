@@ -1,3 +1,6 @@
+import BookButton from "@/components/BookButton";
+import { site } from "@/lib/site";
+
 export default function Offer() {
   return (
     <section className="offer section">
@@ -6,20 +9,28 @@ export default function Offer() {
 
         <div className="offer__data">
           <h2 className="section__title offer__title">
-            Do You Want To Receive <br /> Special Offers?
+            Plan Your Ooty Holiday <br /> with Ooty Cabs
           </h2>
 
           <p className="offer__description">
-            Be the first to receive all the information about our products and
-            new cars by email by subscribing to our mailing list.
+            From a ₹2,500 onwards Ooty sightseeing cab to a premium Force
+            Urbania, from a Coimbatore Airport transfer to a multi-day South
+            India tour — share your travel date, pickup, destination and group
+            size. Call{" "}
+            <a href={`tel:${site.phoneTel}`} className="inline-phone">
+              {site.phoneDisplay}
+            </a>
+            .
           </p>
 
-          <a href="#" className="button">
-            Subscribe Now
-          </a>
+          <BookButton>Send Travel Details</BookButton>
         </div>
 
-        <img src="/assets/img/offer.png" alt="Special offer" className="offer__img" />
+        <img
+          src="/assets/img/offer.png"
+          alt="Ooty taxi offer for sightseeing and transfers"
+          className="offer__img"
+        />
       </div>
     </section>
   );

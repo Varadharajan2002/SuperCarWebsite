@@ -1,66 +1,46 @@
 "use client";
 
-import { useState } from "react";
-import { featuredCars } from "@/lib/data";
-
-const filters = [
-  { id: "all", label: "All" },
-  { id: "tesla", img: "/assets/img/logo3.png", alt: "Tesla" },
-  { id: "audi", img: "/assets/img/logo2.png", alt: "Audi" },
-  { id: "porsche", img: "/assets/img/logo1.png", alt: "Porsche" },
-] as const;
+import Link from "next/link";
+import { vehicles } from "@/lib/site";
+import { useBooking } from "@/components/BookingContext";
 
 export default function Featured() {
-  const [filter, setFilter] = useState<(typeof filters)[number]["id"]>("all");
-
-  const cars =
-    filter === "all"
-      ? featuredCars
-      : featuredCars.filter((car) => car.brand === filter);
+  const { openBooking } = useBooking();
 
   return (
     <section className="featured section" id="featured">
-      <h2 className="section__title">Featured Luxury Cars</h2>
+      <h2 className="section__title">Cab & Vehicle Rental Options</h2>
+      <p className="section-lead">
+        Glanza, Swift, Innova and group vans for Ooty tours
+      </p>
       <div className="featured__container container">
-        <ul className="featured__filters">
-          {filters.map((item) => (
-            <li key={item.id}>
-              <button
-                type="button"
-                className={`featured__item${filter === item.id ? " active-featured" : ""}`}
-                onClick={() => setFilter(item.id)}
-              >
-                {"label" in item ? (
-                  <span>{item.label}</span>
-                ) : (
-                  <img src={item.img} alt={item.alt} />
-                )}
-              </button>
-            </li>
-          ))}
-        </ul>
-
         <div className="featured__content grid">
-          {cars.map((car) => (
-            <article
-              className={`featured__card mix ${car.brand}`}
-              key={`${car.title}-${car.subtitle}`}
-            >
+          {vehicles.map((car) => (
+            <article className={`featured__card mix ${car.id}`} key={car.id}>
               <div className="shapeX shape__smaller"></div>
 
-              <h1 className="featured__title">{car.title}</h1>
-              <h3 className="featured__subtitle">{car.subtitle}</h3>
+              <h1 className="featured__title">{car.brand}</h1>
+              <h3 className="featured__subtitle">{car.name}</h3>
               <img
                 src={car.img}
-                alt={`${car.title} ${car.subtitle}`}
+                alt={`${car.brand} ${car.name} cab rental in Ooty`}
                 className="featured__img"
               />
-              <h3 className="featured__price">{car.price}</h3>
-              <button className="button featured__button" type="button">
-                <i className="ri-shopping-bag-2-line"></i>
+              <h3 className="featured__price">{car.seats}</h3>
+              <button
+                className="button featured__button"
+                type="button"
+                onClick={openBooking}
+              >
+                <i className="ri-calendar-check-line"></i>
               </button>
             </article>
           ))}
+        </div>
+        <div className="center-link">
+          <Link href="/vehicles" className="button">
+            View all vehicles
+          </Link>
         </div>
       </div>
     </section>

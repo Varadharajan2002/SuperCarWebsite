@@ -13,12 +13,13 @@ export default function ScrollUp() {
   }, []);
 
   return (
-    <a
-      href="#home"
+    <button
+      type="button"
       className={`scrollup${visible ? " show-scroll" : ""}`}
       id="scroll-up"
+      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
     >
       <i className="ri-arrow-up-s-line"></i>
-    </a>
+    </button>
   );
 }
