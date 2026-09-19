@@ -119,7 +119,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                 required
                 value={formData.phone}
                 onChange={handleChange}
-                placeholder="84893 22556"
+                placeholder="7806882556"
               />
             </div>
           </div>

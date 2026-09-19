@@ -42,13 +42,7 @@ export default async function TourDetailPage({ params }: Props) {
             <p key={para.slice(0, 40)}>{para}</p>
           ))}
           <PlaceList title={tour.placesTitle} places={tour.places} />
-          {slug === "ooty" && <ContentTable data={ootySightseeingTariff} />}
-          {slug === "coonoor" && (
-            <>
-              <ContentTable data={coonoorDropFare} />
-              <ContentTable data={coonoorRouteTable} />
-            </>
-          )}
+
           <p className="tariff-note">{tariffNote}</p>
         </div>
       </section>

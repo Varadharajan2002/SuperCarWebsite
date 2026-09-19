@@ -1,5 +1,4 @@
-import ContentTable from "@/components/ContentTable";
-import { ootySightseeingTariff, tariffNote } from "@/lib/site";
+
 
 export default function Popular() {
   return (
@@ -19,10 +18,6 @@ export default function Popular() {
         />
       </div>
 
-      <div className="container tariff-home">
-        <ContentTable data={ootySightseeingTariff} />
-        <p className="tariff-note">{tariffNote}</p>
-      </div>
     </section>
   );
 }

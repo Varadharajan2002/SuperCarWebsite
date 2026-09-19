@@ -32,13 +32,6 @@ export default function About() {
             Urbania vehicles are available according to requirement and
             availability.
           </p>
-          <p className="about__description">
-            Based at {site.addressLine}. Call{" "}
-            <a href={`tel:${site.phoneTel}`} className="inline-phone">
-              {site.phoneDisplay}
-            </a>
-            .
-          </p>
 
           <BookButton>Book Your Trip</BookButton>
         </div>

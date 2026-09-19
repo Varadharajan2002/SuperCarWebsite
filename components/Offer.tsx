@@ -13,17 +13,16 @@ export default function Offer() {
           </h2>
 
           <p className="offer__description">
-            From a ₹2,500 onwards Ooty sightseeing cab to a premium Force
+            From a ₹1,500 onwards Ooty sightseeing cab to a premium Force
             Urbania, from a Coimbatore Airport transfer to a multi-day South
-            India tour — share your travel date, pickup, destination and group
-            size. Call{" "}
-            <a href={`tel:${site.phoneTel}`} className="inline-phone">
+            India tour. Book your trip today!
+            <a style={{display:'block', marginTop:'1rem', textAlign:'center'}} href={`tel:${site.phoneTel}`} className="inline-phone">
               {site.phoneDisplay}
             </a>
             .
           </p>
 
-          <BookButton>Send Travel Details</BookButton>
+          <BookButton>Book Your Trip</BookButton>
         </div>
 
         <img

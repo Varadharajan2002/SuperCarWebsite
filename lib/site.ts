@@ -1,10 +1,10 @@
 export const site = {
   name: "Ooty Cabs",
   legalName: "Ooty Cabs - Nivesh",
-  phoneDisplay: "84893 22556",
-  phoneTel: "+918489322556",
+  phoneDisplay: "7806882556",
+  phoneTel: "+917806882556",
   whatsapp: "https://wa.me/918489322556",
-  email: "varadharajan025@gmail.com",
+  email: "ootytripplanners22@gmail.com",
   addressLine: "Nivesh, Ketti, Ooty, Nilgiris, Tamil Nadu 643215",
   locality: "Ketti",
   city: "Ooty",

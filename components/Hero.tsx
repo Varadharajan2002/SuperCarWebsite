@@ -43,14 +43,14 @@ export default function Hero() {
               <div className="home__car-icon">
                 <i className="ri-time-line"></i>
               </div>
-              <h2 className="home__car-number">8h</h2>
+              <h2 className="home__car-number">24h</h2>
               <h3 className="home__car-name">Local tours</h3>
             </div>
             <div className="home__car-data">
               <div className="home__car-icon">
                 <i className="ri-money-rupee-circle-line"></i>
               </div>
-              <h2 className="home__car-number">₹2500</h2>
+              <h2 className="home__car-number">₹1500</h2>
               <h3 className="home__car-name">From onwards</h3>
             </div>
           </div>

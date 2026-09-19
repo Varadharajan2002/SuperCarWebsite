@@ -37,11 +37,6 @@ export default function Featured() {
             </article>
           ))}
         </div>
-        <div className="center-link">
-          <Link href="/vehicles" className="button">
-            View all vehicles
-          </Link>
-        </div>
       </div>
     </section>
   );

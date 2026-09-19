@@ -4,6 +4,7 @@ import Popular from "@/components/Popular";
 import Features from "@/components/Features";
 import Featured from "@/components/Featured";
 import Offer from "@/components/Offer";
+import Content from "@/components/Content";
 
 export default function Page() {
   return (
@@ -13,6 +14,7 @@ export default function Page() {
       <Popular />
       <Features />
       <Featured />
+      <Content />
       <Offer />
     </main>
   );
