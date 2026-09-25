@@ -84,6 +84,9 @@ export const metadata: Metadata = {
     apple: ogImagePath,
   },
   manifest: "/manifest.webmanifest",
+  verification: {
+    google: "tC_g2oM8aRhEgUfJDhuq1Wghrf2K-V8R3c5443mn6FI",
+  },
   alternates: {
     canonical: "/",
     languages: {
@@ -107,6 +110,10 @@ export default function RootLayout({
   return (
     <html lang="en-IN">
       <head>
+        <meta
+          name="google-site-verification"
+          content="tC_g2oM8aRhEgUfJDhuq1Wghrf2K-V8R3c5443mn6FI"
+        />
         <link
           href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
           rel="stylesheet"
