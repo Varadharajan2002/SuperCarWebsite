@@ -12,7 +12,7 @@ export const site = {
   state: "Tamil Nadu",
   postalCode: "643215",
   country: "IN",
-  url: "https://ootycabs.vercel.app",
+  url: "https://super-car-website-beryl.vercel.app",
 };
 
 export const navLinks = [
