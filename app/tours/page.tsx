@@ -2,13 +2,19 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import InnerHero from "@/components/InnerHero";
 import { tours } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Ooty Sightseeing Tours",
+export const metadata: Metadata = pageMetadata({
+  title: "Ooty Sightseeing Cab Tours",
   description:
-    "Private Ooty cab tours for local sightseeing, Coonoor, Pykara, Avalanche and Mudumalai from Ketti, Nilgiris.",
-  alternates: { canonical: "/tours" },
-};
+    "Book Ooty cabs for local sightseeing, Coonoor, Pykara, Avalanche and Mudumalai. Private taxi tours from Ketti, Nilgiris.",
+  path: "/tours",
+  keywords: [
+    "ooty sightseeing cab",
+    "ooty tour package taxi",
+    "ooty local sightseeing taxi",
+  ],
+});
 
 export default function ToursPage() {
   return (

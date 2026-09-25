@@ -2,13 +2,15 @@ import type { Metadata } from "next";
 import InnerHero from "@/components/InnerHero";
 import ContentTable from "@/components/ContentTable";
 import { toyTrainTimings } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Ooty Toy Train Ticket Assistance",
   description:
-    "Nilgiri Mountain Railway Coonoor to Ooty toy train timings and taxi pickup around your train journey.",
-  alternates: { canonical: "/toy-train" },
-};
+    "Nilgiri Mountain Railway Coonoor to Ooty toy train timings plus taxi pickup and drop around your train journey.",
+  path: "/toy-train",
+  keywords: ["ooty toy train", "nilgiri mountain railway taxi", "coonoor to ooty train"],
+});
 
 export default function ToyTrainPage() {
   return (

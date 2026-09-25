@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
 import InnerHero from "@/components/InnerHero";
 import PlaceList from "@/components/PlaceList";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Ooty Hotel Booking & Homestays",
   description:
-    "Help with Ooty hotel booking, homestays, cottages, food and group accommodation from budget to luxury stays.",
-  alternates: { canonical: "/hotels" },
-};
+    "Help with Ooty hotel booking, homestays, cottages, food and group stays from budget to luxury, with taxi sightseeing.",
+  path: "/hotels",
+  keywords: ["ooty hotel booking", "ooty homestay", "ooty cottage stay"],
+});
 
 export default function HotelsPage() {
   return (

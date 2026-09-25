@@ -7,13 +7,19 @@ import {
   southIndiaDestinations,
   tariffNote,
 } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "South India Tours, Guide & Acting Driver",
   description:
-    "South India tour packages from Ooty, sharing mini bus sightseeing, acting driver from ₹1,500/day and tourist guide assistance in the Nilgiris.",
-  alternates: { canonical: "/packages" },
-};
+    "South India tour packages from Ooty, sharing mini bus sightseeing, acting driver from ₹1,500/day and tourist guide in the Nilgiris.",
+  path: "/packages",
+  keywords: [
+    "south india tour from ooty",
+    "ooty sharing sightseeing",
+    "acting driver ooty",
+  ],
+});
 
 export default function PackagesPage() {
   return (

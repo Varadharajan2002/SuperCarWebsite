@@ -2,13 +2,20 @@ import type { Metadata } from "next";
 import InnerHero from "@/components/InnerHero";
 import BookButton from "@/components/BookButton";
 import { vehicles } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Ooty Cab Rental | Glanza, Innova, Tempo Traveller",
   description:
-    "Hire Toyota Glanza, Swift, Innova, Swaraj Mazda Tempo Traveller and Force Urbania for Ooty sightseeing and South India tours.",
-  alternates: { canonical: "/vehicles" },
-};
+    "Hire Toyota Glanza, Swift, Innova, Tempo Traveller and Force Urbania in Ooty. Cab rental for sightseeing, airport drops and South India tours.",
+  path: "/vehicles",
+  keywords: [
+    "ooty cab rental",
+    "innova hire ooty",
+    "tempo traveller rental ooty",
+    "glanza taxi ooty",
+  ],
+});
 
 const extras = [
   {

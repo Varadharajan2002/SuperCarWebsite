@@ -3,13 +3,8 @@ import { notFound } from "next/navigation";
 import InnerHero from "@/components/InnerHero";
 import PlaceList from "@/components/PlaceList";
 import ContentTable from "@/components/ContentTable";
-import {
-  tours,
-  ootySightseeingTariff,
-  coonoorDropFare,
-  coonoorRouteTable,
-  tariffNote,
-} from "@/lib/site";
+import { tours, tariffNote } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -21,11 +16,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const tour = tours.find((item) => item.slug === slug);
   if (!tour) return { title: "Tour" };
-  return {
-    title: `${tour.title} | Ooty Taxi`,
+  return pageMetadata({
+    title: tour.title,
     description: tour.description[0],
-    alternates: { canonical: `/tours/${slug}` },
-  };
+    path: `/tours/${slug}`,
+    keywords: [`${tour.title} cab`, `${tour.title} taxi ooty`],
+  });
 }
 
 export default async function TourDetailPage({ params }: Props) {

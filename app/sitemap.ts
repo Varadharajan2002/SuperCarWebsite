@@ -1,23 +1,23 @@
 import type { MetadataRoute } from "next";
-import { site, tours } from "@/lib/site";
+import { tours } from "@/lib/site";
+import { siteUrl } from "@/lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = process.env.NEXT_PUBLIC_SITE_URL || site.url;
-  const paths = [
-    "",
-    "/tours",
-    "/transfers",
-    "/vehicles",
-    "/packages",
-    "/hotels",
-    "/toy-train",
-    ...tours.map((tour) => `/tours/${tour.slug}`),
+  const entries: { path: string; priority: number }[] = [
+    { path: "", priority: 1 },
+    { path: "/tours", priority: 0.9 },
+    { path: "/transfers", priority: 0.9 },
+    { path: "/vehicles", priority: 0.85 },
+    { path: "/packages", priority: 0.8 },
+    { path: "/hotels", priority: 0.7 },
+    { path: "/toy-train", priority: 0.7 },
+    ...tours.map((tour) => ({ path: `/tours/${tour.slug}`, priority: 0.85 })),
   ];
 
-  return paths.map((path) => ({
-    url: `${base}${path}`,
+  return entries.map(({ path, priority }) => ({
+    url: `${siteUrl}${path}`,
     lastModified: new Date(),
     changeFrequency: "weekly",
-    priority: path === "" ? 1 : 0.8,
+    priority,
   }));
 }

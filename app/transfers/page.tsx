@@ -6,13 +6,20 @@ import {
   coimbatoreFare,
   tariffNote,
 } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Ooty Airport & Railway Transfers",
+export const metadata: Metadata = pageMetadata({
+  title: "Ooty Airport & Railway Taxi Transfers",
   description:
-    "Taxi from Coimbatore Airport, Mettupalayam railway, Mysore and Bangalore to Ooty. 4, 7, 12 and 18 seater cabs from Ketti.",
-  alternates: { canonical: "/transfers" },
-};
+    "Ooty cab from Coimbatore Airport, Mettupalayam railway, Mysore and Bangalore. 4, 7, 12 and 18 seater taxi pickup from Ketti.",
+  path: "/transfers",
+  keywords: [
+    "coimbatore airport to ooty taxi",
+    "mettupalayam to ooty cab",
+    "bangalore to ooty taxi",
+    "mysore to ooty cab",
+  ],
+});
 
 export default function TransfersPage() {
   return (
