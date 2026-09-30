@@ -3,10 +3,10 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { navLinks, site } from "@/lib/site";
+import { site } from "@/lib/site";
 
 export default function Header() {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
 
@@ -24,13 +24,16 @@ export default function Header() {
   return (
     <header className={`header${scrolled ? " scroll-header" : ""}`} id="header">
       <nav className="nav container">
-        <Link href="/" className="nav__logo">
+        <Link href="/" className="nav__logo" aria-label={`${site.name} Home`}>
           <i className="ri-steering-fill"></i>
           {site.name}
         </Link>
 
-
-        <a href={`tel:${site.phoneTel}`} className="nav-phone nav-phone--bar">
+        <a
+          href={`tel:${site.phoneTel}`}
+          className="nav-phone nav-phone--bar"
+          aria-label={`Call ${site.name} at ${site.phoneDisplay}`}
+        >
           <i className="ri-phone-fill"></i>
           {site.phoneDisplay}
         </a>
@@ -39,6 +42,9 @@ export default function Header() {
           className="nav__toggle"
           id="nav-toggle"
           onClick={() => setMenuOpen(true)}
+          role="button"
+          aria-label="Open navigation menu"
+          tabIndex={0}
         >
           <i className="ri-menu-line"></i>
         </div>

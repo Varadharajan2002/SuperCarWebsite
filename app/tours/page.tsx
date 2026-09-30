@@ -1,24 +1,33 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import InnerHero from "@/components/InnerHero";
+import JsonLd from "@/components/JsonLd";
 import { tours } from "@/lib/site";
-import { pageMetadata } from "@/lib/seo";
+import { getBreadcrumbSchema, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Ooty Sightseeing Cab Tours",
+  title: "Ooty Sightseeing Cabs & Day Tour Packages | Ooty Cabs",
   description:
-    "Book Ooty cabs for local sightseeing, Coonoor, Pykara, Avalanche and Mudumalai. Private taxi tours from Ketti, Nilgiris.",
+    "Explore Ooty sightseeing tours, Coonoor, Pykara & Mudumalai in comfortable private cabs. View starting tariffs and custom packages. Book your Ooty tour now!",
   path: "/tours",
   keywords: [
-    "ooty sightseeing cab",
+    "ooty sightseeing cabs",
     "ooty tour package taxi",
-    "ooty local sightseeing taxi",
+    "ooty local sightseeing cab",
+    "ooty day tour cab",
+    "sightseeing in ooty",
   ],
 });
+
+const toursBreadcrumbs = getBreadcrumbSchema([
+  { name: "Home", path: "/" },
+  { name: "Ooty Sightseeing Tours", path: "/tours" },
+]);
 
 export default function ToursPage() {
   return (
     <main className="main">
+      <JsonLd data={toursBreadcrumbs} />
       <InnerHero
         title="Ooty Cab & Taxi Tour Packages"
         subtitle="Private cabs for local sightseeing, one-way journeys and round-trip tours"

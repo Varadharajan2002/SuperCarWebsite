@@ -1,5 +1,4 @@
 import BookButton from "@/components/BookButton";
-import { site } from "@/lib/site";
 
 export default function About() {
   return (
@@ -8,7 +7,10 @@ export default function About() {
         <div className="about__group">
           <img
             src="/assets/img/glanza-interior-steering-wheel.avif"
-            alt="Toyota Glanza interior for comfortable Ooty hill journeys"
+            alt="Toyota Glanza comfortable interior for Ooty hill journeys"
+            width={310}
+            height={174}
+            loading="lazy"
             className="about__img"
           />
 

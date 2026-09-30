@@ -1,19 +1,27 @@
 import type { Metadata } from "next";
 import InnerHero from "@/components/InnerHero";
 import BookButton from "@/components/BookButton";
+import JsonLd from "@/components/JsonLd";
 import { vehicles } from "@/lib/site";
-import { pageMetadata } from "@/lib/seo";
+import {
+  getBreadcrumbSchema,
+  getRentalCarsItemListSchema,
+  pageMetadata,
+} from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Ooty Cab Rental | Glanza, Innova, Tempo Traveller",
+  title: "Car Rental in Ooty – Glanza, Innova & Tempo | Ooty Cabs",
   description:
-    "Hire Toyota Glanza, Swift, Innova, Tempo Traveller and Force Urbania in Ooty. Cab rental for sightseeing, airport drops and South India tours.",
+    "Rent cars in Ooty for self-drive, sightseeing, and outstation trips. Toyota Glanza, Innova Crysta, and Tempo Travellers at best rates. Book your cab now!",
   path: "/vehicles",
   keywords: [
+    "car rental in ooty",
+    "self drive cars ooty",
     "ooty cab rental",
     "innova hire ooty",
     "tempo traveller rental ooty",
     "glanza taxi ooty",
+    "used cars in ooty",
   ],
 });
 
@@ -36,9 +44,17 @@ const extras = [
   },
 ];
 
+const vehicleBreadcrumbs = getBreadcrumbSchema([
+  { name: "Home", path: "/" },
+  { name: "Car Rental in Ooty", path: "/vehicles" },
+]);
+
+const rentalCarsSchema = getRentalCarsItemListSchema();
+
 export default function VehiclesPage() {
   return (
     <main className="main">
+      <JsonLd data={[vehicleBreadcrumbs, rentalCarsSchema]} />
       <InnerHero
         title="Cab & Vehicle Rental Options"
         subtitle="Sedans, SUVs, Tempo Travellers and Force Urbania"
@@ -49,11 +65,14 @@ export default function VehiclesPage() {
             {vehicles.map((car) => (
               <article className="featured__card" key={car.id}>
                 <div className="shapeX shape__smaller"></div>
-                <h1 className="featured__title">{car.brand}</h1>
+                <h3 className="featured__title">{car.brand}</h3>
                 <h3 className="featured__subtitle">{car.name}</h3>
                 <img
                   src={car.img}
-                  alt={`${car.brand} ${car.name} for hire in Ooty`}
+                  alt={car.alt}
+                  width={car.width}
+                  height={car.height}
+                  loading="lazy"
                   className="featured__img"
                 />
                 <h3 className="featured__price">{car.seats}</h3>

@@ -1,23 +1,30 @@
 import type { Metadata } from "next";
-import { site } from "./site";
+import { siteConfig, type RentalVehicle, type SaleVehicle, type TourPage, vehicles } from "./site";
 
 export const siteUrl = (
-  process.env.NEXT_PUBLIC_SITE_URL || site.url
+  process.env.NEXT_PUBLIC_SITE_URL || siteConfig.domain
 ).replace(/\/$/, "");
 
 export const ogImagePath = "/assets/img/home5.png";
 export const ogImageUrl = `${siteUrl}${ogImagePath}`;
 
+// 50-60 chars, main keyword first, "Ooty" included
 export const defaultTitle =
-  "Ooty Cabs | Taxi & Cab Booking in Ooty, Ketti, Nilgiris";
+  "Car Rental in Ooty – Self Drive & Cab Service | Ooty Cabs";
 
+// 140-160 chars with a direct call to action
 export const defaultDescription =
-  "Book Ooty cabs and taxis from Ketti, Nilgiris. Private cab for Ooty sightseeing, Coonoor, Pykara, Coimbatore airport taxi, Mettupalayam transfer, Glanza, Innova and Tempo Traveller.";
+  "Best car rental in Ooty with self-drive and cab services. Hire Glanza, Innova, and Tempo Travellers for sightseeing and Nilgiris tours. Book your trip today!";
 
 export const seoKeywords = [
+  "car rental in ooty",
+  "self drive cars ooty",
+  "ooty taxi",
+  "coimbatore to ooty cab",
+  "used cars in ooty",
+  "second hand cars nilgiris",
   "ooty cabs",
   "ooty cab",
-  "ooty taxi",
   "cabs in ooty",
   "taxi in ooty",
   "ooty cab booking",
@@ -29,6 +36,7 @@ export const seoKeywords = [
   "ketti cab",
   "nilgiris taxi",
   "nilgiris cab",
+  "nilgiris car rental",
   "coonoor taxi",
   "coonoor cab from ooty",
   "pykara taxi",
@@ -44,13 +52,16 @@ export const seoKeywords = [
   "tempo traveller ooty",
   "force urbania ooty",
   "ooty tour package cab",
+  "acting driver in ooty",
+  "ooty toy train ticket booking",
+  "second hand car sale ooty",
 ];
 
 const ogImage = {
-  url: ogImagePath,
+  url: ogImageUrl,
   width: 1200,
   height: 630,
-  alt: "Ooty Cabs — Toyota Glanza taxi for Ooty sightseeing and Nilgiris transfers",
+  alt: "Ooty Cabs — Car rental, self-drive, taxi & sightseeing services in Ooty",
 };
 
 export function pageMetadata({
@@ -64,26 +75,29 @@ export function pageMetadata({
   path: string;
   keywords?: string[];
 }): Metadata {
-  const canonical = path.startsWith("/") ? path : `/${path}`;
-  const fullTitle = title.includes(site.name) ? title : `${title} | ${site.name}`;
-  const isHome = canonical === "/";
+  const normalizedPath = path.startsWith("/") ? path : `/${path}`;
+  const canonicalUrl = `${siteUrl}${normalizedPath === "/" ? "" : normalizedPath}`;
+  const fullTitle = title.includes(siteConfig.businessName)
+    ? title
+    : `${title} | ${siteConfig.businessName}`;
+  const isHome = normalizedPath === "/";
 
   return {
-    title: isHome ? { absolute: title } : title,
+    title: { absolute: fullTitle },
     description,
     keywords: [...seoKeywords, ...keywords],
     alternates: {
-      canonical,
+      canonical: canonicalUrl,
       languages: {
-        "en-IN": canonical,
-        "x-default": canonical,
+        "en-IN": canonicalUrl,
+        "x-default": canonicalUrl,
       },
     },
     openGraph: {
       title: fullTitle,
       description,
-      url: canonical,
-      siteName: site.name,
+      url: canonicalUrl,
+      siteName: siteConfig.businessName,
       locale: "en_IN",
       type: "website",
       images: [ogImage],
@@ -92,90 +106,260 @@ export function pageMetadata({
       card: "summary_large_image",
       title: fullTitle,
       description,
-      images: [ogImagePath],
+      images: [ogImageUrl],
     },
   };
 }
 
-export const jsonLdGraph = {
+// =============================================================================
+// STRUCTURED DATA (JSON-LD) GENERATORS
+// Strictly validated according to Schema.org and Google Search Rich Results
+// =============================================================================
+
+export const siteWideJsonLd = {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": ["LocalBusiness", "TaxiService"],
+      "@type": ["LocalBusiness", "AutoRental", "AutoDealer", "TaxiService"],
       "@id": `${siteUrl}/#business`,
-      name: site.name,
-      legalName: site.legalName,
+      name: siteConfig.businessName,
+      legalName: siteConfig.legalName,
       url: siteUrl,
-      telephone: site.phoneTel,
-      email: site.email,
+      telephone: siteConfig.phoneTel,
+      email: siteConfig.email,
       image: ogImageUrl,
       logo: ogImageUrl,
-      priceRange: "₹₹",
-      currenciesAccepted: "INR",
-      paymentAccepted: "Cash, UPI",
+      priceRange: siteConfig.priceRange,
+      currenciesAccepted: siteConfig.currenciesAccepted,
+      paymentAccepted: siteConfig.paymentAccepted,
       address: {
         "@type": "PostalAddress",
-        streetAddress: "Nivesh, Ketti",
-        addressLocality: "Ooty",
-        addressRegion: "Tamil Nadu",
-        postalCode: site.postalCode,
-        addressCountry: "IN",
+        streetAddress: siteConfig.address.street,
+        addressLocality: siteConfig.address.locality,
+        addressRegion: siteConfig.address.region,
+        postalCode: siteConfig.address.postalCode,
+        addressCountry: siteConfig.address.country,
       },
       geo: {
         "@type": "GeoCoordinates",
-        latitude: 11.381,
-        longitude: 76.736,
+        latitude: siteConfig.geo.latitude,
+        longitude: siteConfig.geo.longitude,
       },
-      areaServed: [
-        "Ooty",
-        "Ketti",
-        "Coonoor",
-        "Kotagiri",
-        "Nilgiris",
-        "Coimbatore",
-        "Mettupalayam",
-        "Mysore",
-        "Bangalore",
-      ],
-      openingHoursSpecification: {
+      areaServed: siteConfig.serviceArea.map((place) => ({
+        "@type": "City",
+        name: place,
+      })),
+      openingHoursSpecification: siteConfig.openingHoursSpecification.map((spec) => ({
         "@type": "OpeningHoursSpecification",
-        dayOfWeek: [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-          "Sunday",
-        ],
-        opens: "00:00",
-        closes: "23:59",
-      },
+        dayOfWeek: spec.days,
+        opens: spec.opens,
+        closes: spec.closes,
+      })),
+      sameAs: siteConfig.sameAs.filter(Boolean),
       contactPoint: {
         "@type": "ContactPoint",
-        telephone: site.phoneTel,
+        telephone: siteConfig.phoneTel,
         contactType: "customer service",
         areaServed: "IN",
-        availableLanguage: ["en", "ta"],
+        availableLanguage: ["en", "ta", "hi"],
       },
       hasOfferCatalog: {
         "@type": "OfferCatalog",
-        name: "Ooty cab and taxi services",
+        name: "Ooty Cabs Car Rental, Taxi & Vehicle Services",
         itemListElement: [
-          { "@type": "Offer", itemOffered: { "@type": "Service", name: "Ooty sightseeing cab" } },
-          { "@type": "Offer", itemOffered: { "@type": "Service", name: "Coimbatore airport to Ooty taxi" } },
-          { "@type": "Offer", itemOffered: { "@type": "Service", name: "Mettupalayam to Ooty taxi" } },
-          { "@type": "Offer", itemOffered: { "@type": "Service", name: "Tempo Traveller rental in Ooty" } },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Car Rental in Ooty (Self-Drive & With Driver)",
+              description: "Self drive and chauffeur driven car rental in Ooty, Nilgiris.",
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Ooty Sightseeing Cab Services",
+              description: "Local day tours of Botanical Garden, Ooty Lake, Doddabetta, Pykara & Coonoor.",
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Coimbatore Airport to Ooty Taxi Transfer",
+              description: "Fixed fare on-time pickup and drop taxi from Coimbatore International Airport.",
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Mettupalayam Railway Station to Ooty Taxi",
+              description: "Connecting cab transfers from Mettupalayam Railway Station up the Nilgiris ghat road.",
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Tempo Traveller & Force Urbania Rental",
+              description: "12 to 18 seater luxury group vans for families, weddings and corporate Nilgiris tours.",
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Used & Pre-Owned Car Sales in Ooty Nilgiris",
+              description: "Certified pre-owned hill-tested second hand cars for sale in Ooty, Nilgiris.",
+            },
+          },
         ],
       },
     },
     {
       "@type": "WebSite",
       "@id": `${siteUrl}/#website`,
-      name: site.name,
+      name: siteConfig.businessName,
       url: siteUrl,
       publisher: { "@id": `${siteUrl}/#business` },
       inLanguage: "en-IN",
     },
   ],
 };
+
+// Backward-compatible alias
+export const jsonLdGraph = siteWideJsonLd;
+
+export function getBreadcrumbSchema(items: { name: string; path: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => {
+      const normalized = item.path.startsWith("/") ? item.path : `/${item.path}`;
+      const itemUrl = `${siteUrl}${normalized === "/" ? "" : normalized}`;
+      return {
+        "@type": "ListItem",
+        position: index + 1,
+        name: item.name,
+        item: itemUrl,
+      };
+    }),
+  };
+}
+
+export function generateRentalCarSchema(car: RentalVehicle) {
+  return {
+    "@context": "https://schema.org",
+    "@type": ["Car", "Product"],
+    name: `${car.brand} ${car.name} for Rent in Ooty`,
+    image: `${siteUrl}${car.img}`,
+    description: `${car.note} Available for self-drive and cab booking in Ooty, Nilgiris.`,
+    brand: {
+      "@type": "Brand",
+      name: car.brand,
+    },
+    model: car.model || car.name,
+    vehicleModelDate: car.vehicleModelDate || "2023",
+    fuelType: car.fuelType || "Petrol",
+    vehicleConfiguration: car.seats,
+    seatingCapacity: car.seatingCapacity,
+    offers: {
+      "@type": "Offer",
+      price: car.priceStarting,
+      priceCurrency: "INR",
+      priceValidUntil: "2027-12-31",
+      availability: "https://schema.org/InStock",
+      url: `${siteUrl}/vehicles`,
+      seller: {
+        "@type": "AutoRental",
+        name: siteConfig.businessName,
+        telephone: siteConfig.phoneTel,
+        url: siteUrl,
+      },
+    },
+  };
+}
+
+export function getRentalCarsItemListSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Rental Cars & Cabs Available in Ooty",
+    numberOfItems: vehicles.length,
+    itemListElement: vehicles.map((car, idx) => ({
+      "@type": "ListItem",
+      position: idx + 1,
+      item: generateRentalCarSchema(car),
+    })),
+  };
+}
+
+export function generateSaleCarSchema(car: SaleVehicle) {
+  return {
+    "@context": "https://schema.org",
+    "@type": ["Car", "Product"],
+    name: `${car.brand} ${car.name} (${car.vehicleModelDate}) for Sale in Ooty`,
+    image: `${siteUrl}${car.img}`,
+    description: `${car.note} Certified pre-owned vehicle for sale in Ooty, Nilgiris.`,
+    brand: {
+      "@type": "Brand",
+      name: car.brand,
+    },
+    model: car.model,
+    vehicleModelDate: car.vehicleModelDate,
+    mileageFromOdometer: {
+      "@type": "QuantitativeValue",
+      value: car.mileageValue,
+      unitCode: "KMT",
+    },
+    fuelType: car.fuelType,
+    itemCondition: car.itemCondition,
+    offers: {
+      "@type": "Offer",
+      price: car.price,
+      priceCurrency: car.priceCurrency,
+      priceValidUntil: "2027-12-31",
+      availability: car.availability,
+      url: `${siteUrl}/vehicles`,
+      seller: {
+        "@type": "AutoDealer",
+        name: siteConfig.businessName,
+        telephone: siteConfig.phoneTel,
+        url: siteUrl,
+      },
+    },
+  };
+}
+
+export function getTourSchema(tour: TourPage) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "TouristTrip",
+    name: `${tour.title} – Ooty Cabs`,
+    description: tour.description[0],
+    touristType: ["Couples", "Families", "Groups", "Senior Citizens"],
+    provider: {
+      "@id": `${siteUrl}/#business`,
+    },
+    offers: {
+      "@type": "Offer",
+      price: 2500,
+      priceCurrency: "INR",
+      priceValidUntil: "2027-12-31",
+      availability: "https://schema.org/InStock",
+      url: `${siteUrl}/tours/${tour.slug}`,
+    },
+    itinerary: {
+      "@type": "ItemList",
+      name: tour.placesTitle,
+      numberOfItems: tour.places.length,
+      itemListElement: tour.places.map((place, idx) => ({
+        "@type": "ListItem",
+        position: idx + 1,
+        name: place,
+      })),
+    },
+  };
+}

@@ -6,7 +6,13 @@ import Features from "@/components/Features";
 import Featured from "@/components/Featured";
 import Offer from "@/components/Offer";
 import Content from "@/components/Content";
-import { defaultDescription, defaultTitle, pageMetadata } from "@/lib/seo";
+import JsonLd from "@/components/JsonLd";
+import {
+  defaultDescription,
+  defaultTitle,
+  getBreadcrumbSchema,
+  pageMetadata,
+} from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: defaultTitle,
@@ -14,9 +20,12 @@ export const metadata: Metadata = pageMetadata({
   path: "/",
 });
 
+const homeBreadcrumbs = getBreadcrumbSchema([{ name: "Home", path: "/" }]);
+
 export default function Page() {
   return (
     <main className="main">
+      <JsonLd data={homeBreadcrumbs} />
       <Hero />
       <About />
       <Popular />

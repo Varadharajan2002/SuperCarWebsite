@@ -1,29 +1,38 @@
 import type { Metadata } from "next";
 import InnerHero from "@/components/InnerHero";
 import ContentTable from "@/components/ContentTable";
+import JsonLd from "@/components/JsonLd";
 import {
   mettupalayamDropFare,
   coimbatoreFare,
   tariffNote,
 } from "@/lib/site";
-import { pageMetadata } from "@/lib/seo";
+import { getBreadcrumbSchema, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Ooty Airport & Railway Taxi Transfers",
+  title: "Coimbatore to Ooty Cab & Airport Taxi Service | Ooty Cabs",
   description:
-    "Ooty cab from Coimbatore Airport, Mettupalayam railway, Mysore and Bangalore. 4, 7, 12 and 18 seater taxi pickup from Ketti.",
+    "Reliable airport and railway taxi transfers from Coimbatore, Mettupalayam, Mysore & Bangalore to Ooty. 24/7 on-time pickup guaranteed. Book your cab today!",
   path: "/transfers",
   keywords: [
+    "coimbatore to ooty cab",
     "coimbatore airport to ooty taxi",
-    "mettupalayam to ooty cab",
-    "bangalore to ooty taxi",
-    "mysore to ooty cab",
+    "mettupalayam to ooty taxi",
+    "bangalore to ooty cab",
+    "mysore to ooty taxi",
+    "ooty drop taxi",
   ],
 });
+
+const transferBreadcrumbs = getBreadcrumbSchema([
+  { name: "Home", path: "/" },
+  { name: "Airport & Railway Station Transfers", path: "/transfers" },
+]);
 
 export default function TransfersPage() {
   return (
     <main className="main">
+      <JsonLd data={transferBreadcrumbs} />
       <InnerHero
         title="Ooty Airport & Railway Station Transfers"
         subtitle="Private pickup around your arrival and departure time"

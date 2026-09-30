@@ -5,7 +5,14 @@ export default function Offer() {
   return (
     <section className="offer section">
       <div className="offer__container container grid">
-        <img src="/assets/img/offer-bg.png" alt="" className="offer__bg" />
+        <img
+          src="/assets/img/offer-bg.png"
+          alt="Ooty hill station holiday travel offer background"
+          width={1536}
+          height={864}
+          loading="lazy"
+          className="offer__bg"
+        />
 
         <div className="offer__data">
           <h2 className="section__title offer__title">
@@ -16,7 +23,15 @@ export default function Offer() {
             From a ₹1,500 onwards Ooty sightseeing cab to a premium Force
             Urbania, from a Coimbatore Airport transfer to a multi-day South
             India tour. Book your trip today!
-            <a style={{display:'block', marginTop:'1rem', textAlign:'center'}} href={`tel:${site.phoneTel}`} className="inline-phone">
+            <a
+              style={{
+                display: "block",
+                marginTop: "1rem",
+                textAlign: "center",
+              }}
+              href={`tel:${site.phoneTel}`}
+              className="inline-phone"
+            >
               {site.phoneDisplay}
             </a>
             .
@@ -27,7 +42,10 @@ export default function Offer() {
 
         <img
           src="/assets/img/offer.png"
-          alt="Ooty taxi offer for sightseeing and transfers"
+          alt="Ooty taxi and cab rental offer for sightseeing and transfers"
+          width={1536}
+          height={1024}
+          loading="lazy"
           className="offer__img"
         />
       </div>

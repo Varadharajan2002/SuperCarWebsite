@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import InnerHero from "@/components/InnerHero";
 import PlaceList from "@/components/PlaceList";
-import ContentTable from "@/components/ContentTable";
+import JsonLd from "@/components/JsonLd";
 import { tours, tariffNote } from "@/lib/site";
-import { pageMetadata } from "@/lib/seo";
+import { getBreadcrumbSchema, getTourSchema, pageMetadata } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -15,12 +15,18 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const tour = tours.find((item) => item.slug === slug);
-  if (!tour) return { title: "Tour" };
+  if (!tour) return { title: "Tour | Ooty Cabs" };
+
   return pageMetadata({
-    title: tour.title,
-    description: tour.description[0],
+    title: tour.seoTitle,
+    description: tour.seoDescription,
     path: `/tours/${slug}`,
-    keywords: [`${tour.title} cab`, `${tour.title} taxi ooty`],
+    keywords: [
+      `${tour.title.toLowerCase()} cab`,
+      `${tour.slug} taxi ooty`,
+      "ooty sightseeing taxi",
+      "ooty cabs",
+    ],
   });
 }
 
@@ -29,8 +35,17 @@ export default async function TourDetailPage({ params }: Props) {
   const tour = tours.find((item) => item.slug === slug);
   if (!tour) notFound();
 
+  const breadcrumbs = getBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Ooty Sightseeing Tours", path: "/tours" },
+    { name: tour.title, path: `/tours/${slug}` },
+  ]);
+
+  const tourSchema = getTourSchema(tour);
+
   return (
     <main className="main">
+      <JsonLd data={[breadcrumbs, tourSchema]} />
       <InnerHero title={tour.title} subtitle={tour.subtitle} />
       <section className="section">
         <div className="container page-body">

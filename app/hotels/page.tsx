@@ -1,19 +1,32 @@
 import type { Metadata } from "next";
 import InnerHero from "@/components/InnerHero";
 import PlaceList from "@/components/PlaceList";
-import { pageMetadata } from "@/lib/seo";
+import JsonLd from "@/components/JsonLd";
+import { getBreadcrumbSchema, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Ooty Hotel Booking & Homestays",
+  title: "Ooty Hotel Booking & Homestay Assistance | Ooty Cabs",
   description:
-    "Help with Ooty hotel booking, homestays, cottages, food and group stays from budget to luxury, with taxi sightseeing.",
+    "Book verified budget to luxury hotels, cottages, and homestays in Ooty with cab sightseeing packages. Best rates and local support. Contact us to book now!",
   path: "/hotels",
-  keywords: ["ooty hotel booking", "ooty homestay", "ooty cottage stay"],
+  keywords: [
+    "ooty hotel booking",
+    "ooty homestay",
+    "ooty cottage stay",
+    "ooty accommodation with taxi",
+    "resorts in ooty",
+  ],
 });
+
+const hotelBreadcrumbs = getBreadcrumbSchema([
+  { name: "Home", path: "/" },
+  { name: "Ooty Hotels & Homestays", path: "/hotels" },
+]);
 
 export default function HotelsPage() {
   return (
     <main className="main">
+      <JsonLd data={hotelBreadcrumbs} />
       <InnerHero
         title="Ooty Hotel Booking & Accommodation"
         subtitle="Hotels, homestays, cottages and food assistance"

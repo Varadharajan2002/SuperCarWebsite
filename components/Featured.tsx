@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { vehicles } from "@/lib/site";
 import { useBooking } from "@/components/BookingContext";
 
@@ -19,11 +18,14 @@ export default function Featured() {
             <article className={`featured__card mix ${car.id}`} key={car.id}>
               <div className="shapeX shape__smaller"></div>
 
-              <h1 className="featured__title">{car.brand}</h1>
+              <h3 className="featured__title">{car.brand}</h3>
               <h3 className="featured__subtitle">{car.name}</h3>
               <img
                 src={car.img}
-                alt={`${car.brand} ${car.name} cab rental in Ooty`}
+                alt={car.alt}
+                width={car.width}
+                height={car.height}
+                loading="lazy"
                 className="featured__img"
               />
               <h3 className="featured__price">{car.seats}</h3>
@@ -31,6 +33,7 @@ export default function Featured() {
                 className="button featured__button"
                 type="button"
                 onClick={openBooking}
+                aria-label={`Book ${car.brand} ${car.name} in Ooty`}
               >
                 <i className="ri-calendar-check-line"></i>
               </button>

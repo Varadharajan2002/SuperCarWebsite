@@ -2,28 +2,37 @@ import type { Metadata } from "next";
 import InnerHero from "@/components/InnerHero";
 import ContentTable from "@/components/ContentTable";
 import PlaceList from "@/components/PlaceList";
+import JsonLd from "@/components/JsonLd";
 import {
   sharingTours,
   southIndiaDestinations,
   tariffNote,
 } from "@/lib/site";
-import { pageMetadata } from "@/lib/seo";
+import { getBreadcrumbSchema, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "South India Tours, Guide & Acting Driver",
+  title: "Ooty Tour Packages & Acting Driver Service | Ooty Cabs",
   description:
-    "South India tour packages from Ooty, sharing mini bus sightseeing, acting driver from ₹1,500/day and tourist guide in the Nilgiris.",
+    "Custom South India tour packages, sharing mini bus tours, tourist guides, and acting driver service in Ooty from ₹1,500/day. Call now to plan your holiday!",
   path: "/packages",
   keywords: [
+    "ooty tour packages",
+    "acting driver ooty",
     "south india tour from ooty",
     "ooty sharing sightseeing",
-    "acting driver ooty",
+    "tourist guide ooty",
   ],
 });
+
+const packagesBreadcrumbs = getBreadcrumbSchema([
+  { name: "Home", path: "/" },
+  { name: "Packages & Extra Services", path: "/packages" },
+]);
 
 export default function PackagesPage() {
   return (
     <main className="main">
+      <JsonLd data={packagesBreadcrumbs} />
       <InnerHero
         title="Packages & Extra Services"
         subtitle="South India tours, sharing sightseeing, driver and guide"
@@ -37,7 +46,10 @@ export default function PackagesPage() {
             your starting point, number of days, passengers, sightseeing
             interests and preferred vehicle.
           </p>
-          <PlaceList title="Popular South India Destinations" places={southIndiaDestinations} />
+          <PlaceList
+            title="Popular South India Destinations"
+            places={southIndiaDestinations}
+          />
 
           <h2 className="page-h2">Ooty Sharing Mini Bus Sightseeing</h2>
           <p>

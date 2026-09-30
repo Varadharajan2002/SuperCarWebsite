@@ -27,7 +27,10 @@ export default function Hero() {
 
           <img
             src="/assets/img/home5.png"
-            alt="Toyota Glanza taxi for Ooty sightseeing and Nilgiris cab booking"
+            alt="Toyota Glanza car rental and taxi for Ooty sightseeing and Nilgiris tours"
+            width={1536}
+            height={1024}
+            fetchPriority="high"
             className="home__img"
           />
           <div className="home__car">
@@ -70,13 +73,27 @@ export default function Hero() {
           </div>
         </div>
         <div className="home__social">
-          <a href={site.whatsapp} className="home__social-icon" target="_blank" rel="noreferrer">
+          <a
+            href={site.whatsapp}
+            className="home__social-icon"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Contact Ooty Cabs on WhatsApp"
+          >
             <i className="ri-whatsapp-fill"></i>
           </a>
-          <a href={`tel:${site.phoneTel}`} className="home__social-icon">
+          <a
+            href={`tel:${site.phoneTel}`}
+            className="home__social-icon"
+            aria-label="Call Ooty Cabs phone"
+          >
             <i className="ri-phone-fill"></i>
           </a>
-          <a href={`mailto:${site.email}`} className="home__social-icon">
+          <a
+            href={`mailto:${site.email}`}
+            className="home__social-icon"
+            aria-label="Email Ooty Cabs"
+          >
             <i className="ri-mail-fill"></i>
           </a>
         </div>

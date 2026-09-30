@@ -1,11 +1,11 @@
 import type { MetadataRoute } from "next";
 import { defaultDescription } from "@/lib/seo";
-import { site } from "@/lib/site";
+import { siteConfig } from "@/lib/site";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: site.name,
-    short_name: site.name,
+    name: siteConfig.businessName,
+    short_name: siteConfig.businessName,
     description: defaultDescription,
     start_url: "/",
     display: "standalone",
@@ -16,6 +16,12 @@ export default function manifest(): MetadataRoute.Manifest {
       {
         src: "/assets/img/home5.png",
         sizes: "512x512",
+        type: "image/png",
+        purpose: "any",
+      },
+      {
+        src: "/assets/img/favicon.png",
+        sizes: "32x32",
         type: "image/png",
         purpose: "any",
       },

@@ -1,16 +1,15 @@
 import Link from "next/link";
 import { site } from "@/lib/site";
-import BookButton from "@/components/BookButton";
 
 export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer  className="footer section">
+    <footer className="footer section">
       <div className="shapeX shape__big"></div>
       <div className="shapeX shape__small"></div>
 
-      <div style={{maxWidth:'1000px'}} className="footer__container container grid">
+      <div style={{ maxWidth: "1000px" }} className="footer__container container grid">
         <div className="footer__content">
           <Link href="/" className="footer__logo">
             <i className="ri-steering-line"></i>
@@ -22,23 +21,39 @@ export default function Footer() {
             transfers and Nilgiris tours from Ketti.
           </p>
           <p className="footer__address">{site.addressLine}</p>
-          <a href={`tel:${site.phoneTel}`} className="footer-phone">
+          <a href={`tel:${site.phoneTel}`} className="footer-phone" aria-label="Call Ooty Cabs">
             <i className="ri-phone-fill"></i>
             {site.phoneDisplay}
           </a>
         </div>
 
-
-        <div style={{marginLeft:'22rem', padding:'2rem', borderRadius:'10px'}} className="footer__content">
+        <div
+          style={{ marginLeft: "22rem", padding: "2rem", borderRadius: "10px" }}
+          className="footer__content"
+        >
           <h3 className="footer__title">Contact</h3>
           <ul className="footer__social">
-            <a href={site.whatsapp} target="_blank" className="footer__social-link" rel="noreferrer">
+            <a
+              href={site.whatsapp}
+              target="_blank"
+              className="footer__social-link"
+              rel="noreferrer"
+              aria-label="Chat with Ooty Cabs on WhatsApp"
+            >
               <i className="ri-whatsapp-line"></i>
             </a>
-            <a href={`tel:${site.phoneTel}`} className="footer__social-link">
+            <a
+              href={`tel:${site.phoneTel}`}
+              className="footer__social-link"
+              aria-label="Call Ooty Cabs phone"
+            >
               <i className="ri-phone-line"></i>
             </a>
-            <a href={`mailto:${site.email}`} className="footer__social-link">
+            <a
+              href={`mailto:${site.email}`}
+              className="footer__social-link"
+              aria-label="Send email to Ooty Cabs"
+            >
               <i className="ri-mail-line"></i>
             </a>
           </ul>

@@ -1,20 +1,32 @@
 import type { Metadata } from "next";
 import InnerHero from "@/components/InnerHero";
 import ContentTable from "@/components/ContentTable";
+import JsonLd from "@/components/JsonLd";
 import { toyTrainTimings } from "@/lib/site";
-import { pageMetadata } from "@/lib/seo";
+import { getBreadcrumbSchema, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Ooty Toy Train Ticket Assistance",
+  title: "Ooty Toy Train Booking Assistance & Taxi | Ooty Cabs",
   description:
-    "Nilgiri Mountain Railway Coonoor to Ooty toy train timings plus taxi pickup and drop around your train journey.",
+    "Nilgiri Mountain Railway Toy Train timings and booking assistance with connecting cab pickup and drop in Coonoor and Ooty. Plan your heritage ride today!",
   path: "/toy-train",
-  keywords: ["ooty toy train", "nilgiri mountain railway taxi", "coonoor to ooty train"],
+  keywords: [
+    "ooty toy train",
+    "ooty toy train booking",
+    "nilgiri mountain railway taxi",
+    "coonoor to ooty train cab",
+  ],
 });
+
+const toyTrainBreadcrumbs = getBreadcrumbSchema([
+  { name: "Home", path: "/" },
+  { name: "Toy Train Ticket Assistance", path: "/toy-train" },
+]);
 
 export default function ToyTrainPage() {
   return (
     <main className="main">
+      <JsonLd data={toyTrainBreadcrumbs} />
       <InnerHero
         title="Ooty Toy Train Ticket Assistance"
         subtitle="Nilgiri Mountain Railway with cab pickup and drop"

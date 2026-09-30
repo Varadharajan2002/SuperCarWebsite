@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -6,11 +7,11 @@ import ScrollUp from "@/components/ScrollUp";
 import InitAnimations from "@/components/InitAnimations";
 import BookingProvider from "@/components/BookingContext";
 import JsonLd from "@/components/JsonLd";
-import { site } from "@/lib/site";
+import { siteConfig } from "@/lib/site";
 import {
   defaultDescription,
   defaultTitle,
-  jsonLdGraph,
+  siteWideJsonLd,
   ogImagePath,
   seoKeywords,
   siteUrl,
@@ -27,17 +28,17 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     default: defaultTitle,
-    template: `%s | ${site.name}`,
+    template: `%s | ${siteConfig.businessName}`,
   },
   description: defaultDescription,
-  applicationName: site.name,
+  applicationName: siteConfig.businessName,
   generator: "Next.js",
   keywords: seoKeywords,
-  authors: [{ name: site.legalName, url: siteUrl }],
-  creator: site.legalName,
-  publisher: site.name,
+  authors: [{ name: siteConfig.legalName, url: siteUrl }],
+  creator: siteConfig.legalName,
+  publisher: siteConfig.businessName,
   category: "travel",
-  classification: "Ooty taxi, cab booking and sightseeing tours",
+  classification: "Ooty car rental, taxi booking, sightseeing tours and used cars",
   referrer: "origin-when-cross-origin",
   formatDetection: {
     telephone: true,
@@ -59,16 +60,16 @@ export const metadata: Metadata = {
   openGraph: {
     title: defaultTitle,
     description: defaultDescription,
-    url: "/",
-    siteName: site.name,
+    url: siteUrl,
+    siteName: siteConfig.businessName,
     locale: "en_IN",
     type: "website",
     images: [
       {
-        url: ogImagePath,
+        url: `${siteUrl}${ogImagePath}`,
         width: 1200,
         height: 630,
-        alt: "Ooty Cabs taxi booking in Ooty, Ketti and Nilgiris",
+        alt: "Ooty Cabs — Car rental, self-drive, taxi & sightseeing services in Ooty",
       },
     ],
   },
@@ -76,29 +77,29 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: defaultTitle,
     description: defaultDescription,
-    images: [ogImagePath],
+    images: [`${siteUrl}${ogImagePath}`],
   },
   icons: {
-    icon: [{ url: ogImagePath, type: "image/png" }],
-    shortcut: ogImagePath,
-    apple: ogImagePath,
+    icon: [{ url: "/assets/img/favicon.png", type: "image/png" }],
+    shortcut: "/assets/img/favicon.png",
+    apple: "/assets/img/favicon.png",
   },
   manifest: "/manifest.webmanifest",
   verification: {
-    google: "tC_g2oM8aRhEgUfJDhuq1Wghrf2K-V8R3c5443mn6FI",
+    google: siteConfig.googleSiteVerification,
   },
   alternates: {
-    canonical: "/",
+    canonical: siteUrl,
     languages: {
-      "en-IN": "/",
-      "x-default": "/",
+      "en-IN": siteUrl,
+      "x-default": siteUrl,
     },
   },
   other: {
     "geo.region": "IN-TN",
     "geo.placename": "Ooty, Ketti, Nilgiris",
-    "geo.position": "11.381;76.736",
-    ICBM: "11.381, 76.736",
+    "geo.position": `${siteConfig.geo.latitude};${siteConfig.geo.longitude}`,
+    ICBM: `${siteConfig.geo.latitude}, ${siteConfig.geo.longitude}`,
   },
 };
 
@@ -108,19 +109,64 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en-IN">
+    <html lang="en-IN" suppressHydrationWarning>
       <head>
         <meta
           name="google-site-verification"
-          content="tC_g2oM8aRhEgUfJDhuq1Wghrf2K-V8R3c5443mn6FI"
+          content={siteConfig.googleSiteVerification}
         />
+        {/* Preconnect to external font and icon CDNs */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preconnect"
+          href="https://cdn.jsdelivr.net"
+          crossOrigin="anonymous"
+        />
+
+        {/* Preload primary hero image for optimal LCP (<2.5s) */}
+        <link
+          rel="preload"
+          href="/assets/img/home5.png"
+          as="image"
+          type="image/png"
+          fetchPriority="high"
+        />
+
+        {/* Remixicon stylesheet */}
         <link
           href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
           rel="stylesheet"
         />
-        <JsonLd data={jsonLdGraph} />
+
+        {/* Site-wide Schema.org JSON-LD (LocalBusiness, AutoRental, AutoDealer, TaxiService, WebSite) */}
+        <JsonLd data={siteWideJsonLd} />
+
+        {/* Google Analytics 4 (GA4) - Non-blocking deferred loading */}
+        {siteConfig.gaMeasurementId ? (
+          <>
+            <Script
+              strategy="afterInteractive"
+              src={`https://www.googletagmanager.com/gtag/js?id=${siteConfig.gaMeasurementId}`}
+            />
+            <Script id="google-analytics-init" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${siteConfig.gaMeasurementId}', {
+                  page_path: window.location.pathname,
+                });
+              `}
+            </Script>
+          </>
+        ) : null}
       </head>
-      <body>
+      <body suppressHydrationWarning>
         <BookingProvider>
           <Header />
           {children}
