@@ -111,10 +111,18 @@ export default function RootLayout({
   return (
     <html lang="en-IN" suppressHydrationWarning>
       <head>
-        <meta
-          name="google-site-verification"
-          content={siteConfig.googleSiteVerification}
-        />
+        {/* Google Tag Manager (GTM) - Head Snippet */}
+        {siteConfig.gtmId ? (
+          <Script id="google-tag-manager" strategy="afterInteractive">
+            {`
+              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+              })(window,document,'script','dataLayer','${siteConfig.gtmId}');
+            `}
+          </Script>
+        ) : null}
         {/* Preconnect to external font and icon CDNs */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
@@ -167,6 +175,17 @@ export default function RootLayout({
         ) : null}
       </head>
       <body suppressHydrationWarning>
+        {/* Google Tag Manager (GTM) - Body noscript fallback */}
+        {siteConfig.gtmId ? (
+          <noscript>
+            <iframe
+              src={`https://www.googletagmanager.com/ns.html?id=${siteConfig.gtmId}`}
+              height="0"
+              width="0"
+              style={{ display: "none", visibility: "hidden" }}
+            />
+          </noscript>
+        ) : null}
         <BookingProvider>
           <Header />
           {children}

@@ -85,8 +85,12 @@ export const siteConfig = {
   paymentAccepted: "Cash, UPI, Net Banking, Credit Card, Debit Card",
 
   // Verification & Analytics Hooks
-  googleSiteVerification: "tC_g2oM8aRhEgUfJDhuq1Wghrf2K-V8R3c5443mn6FI",
+  googleSiteVerification: [
+    "aC6rAZQgrYDaM6gAD91cZWQEJeRqfkMSnDwdRtOkAR8",
+    "tC_g2oM8aRhEgUfJDhuq1Wghrf2K-V8R3c5443mn6FI",
+  ],
   gaMeasurementId: "", // [PLACEHOLDER - Replace with your GA4 Measurement ID, e.g. G-XXXXXXXXXX]
+  gtmId: "", // [PLACEHOLDER - Replace with your GTM Container ID, e.g. GTM-XXXXXXX]
 };
 
 // Backward-compatible site object used throughout components
