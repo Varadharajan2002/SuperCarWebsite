@@ -86,6 +86,7 @@ export const siteConfig = {
 
   // Verification & Analytics Hooks
   googleSiteVerification: [
+    "5f9f6e1185a713b5",
     "aC6rAZQgrYDaM6gAD91cZWQEJeRqfkMSnDwdRtOkAR8",
     "tC_g2oM8aRhEgUfJDhuq1Wghrf2K-V8R3c5443mn6FI",
   ],
